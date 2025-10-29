@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { iconIds } from '@/shared/constants/IconIds'
-import { defineAsyncComponent, shallowRef, watchEffect } from 'vue'
+import { defineAsyncComponent, shallowRef, toRefs, watchEffect } from 'vue'
 
 interface IconProps {
   width: number
@@ -10,6 +10,8 @@ interface IconProps {
 
 const props = defineProps<IconProps>()
 
+const { width, height } = toRefs(props)
+
 const iconPath = shallowRef()
 
 watchEffect(() => {
@@ -18,5 +20,13 @@ watchEffect(() => {
 </script>
 
 <template>
-  <component :is="iconPath" :width="props.width" :height="props.height" />
+  <component :is="iconPath" class="icon" />
 </template>
+
+<style scoped>
+.icon {
+  width: v-bind('width + "px"');
+  height: v-bind('height + "px"');
+  overflow: hidden;
+}
+</style>
