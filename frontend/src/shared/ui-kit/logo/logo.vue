@@ -16,7 +16,7 @@ const isTitleVisible = computed(() => props.withTitle)
 <template>
   <div class="logo">
     <Icon :width="24" :height="24" :iconId="iconIds.logo" />
-    <h1 class="logo-text" v-if="isTitleVisible">Trello Clone by Kurbik</h1>
+    <h1 class="logo-text" v-if="isTitleVisible">Trello Clone</h1>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ const isTitleVisible = computed(() => props.withTitle)
 }
 .logo-text {
   color: #172b4d;
-  font-family: Inter;
+  font-family: 'Inter';
   font-size: 18px;
   font-style: normal;
   font-weight: 700;

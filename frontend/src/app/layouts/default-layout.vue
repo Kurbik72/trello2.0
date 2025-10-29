@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import Logo from '@/shared/ui-kit/logo/logo.vue'
+import Header from '@/widgets/header/ui/header.vue'
 </script>
 
 <template>
-  <logo />
+  <Header />
 </template>
+
+<style scoped></style>
