@@ -9,7 +9,7 @@ import Search from './search.vue'
       <logo />
     </div>
     <div>
-      <search />
+      <search placeholder="Search" />
     </div>
   </header>
 </template>
@@ -19,5 +19,7 @@ import Search from './search.vue'
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 12px 24px;
+  background: #fff;
 }
 </style>
