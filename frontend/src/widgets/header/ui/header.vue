@@ -19,8 +19,9 @@ import FiltersCard from '@/widgets/filters-card/ui/filters-card.vue'
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px;
+  padding: 12px 24px;
   background: #fff;
+  border-bottom: 1px solid #e5e7eb;
 }
 .header-options {
   display: flex;

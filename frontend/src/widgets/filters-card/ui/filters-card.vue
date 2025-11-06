@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useToggle } from '@/shared/composables/use-toggle'
-import IconButton from '@/shared/ui-kit/option-button/icon-button.vue'
+import IconButton from '@/shared/ui-kit/icon-button/icon-button.vue'
 const { isActive, toggle } = useToggle()
 
 const filterCardClasses = computed(
@@ -10,5 +10,10 @@ const filterCardClasses = computed(
 </script>
 
 <template>
-  <icon-button :icon="filterCardClasses" :isActive="isActive" @toggle="toggle" />
+  <icon-button
+    :icon="filterCardClasses"
+    :isActive="isActive"
+    @toggle="toggle"
+    tooltip="You can filter your board by name, description, or tags."
+  />
 </template>

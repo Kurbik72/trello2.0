@@ -3,7 +3,6 @@ import DefaultLayout from './app/layouts/default-layout.vue'
 </script>
 
 <template>
-  <DefaultLayout />
+  <default-layout />
+  <router-view />
 </template>
-
-<style scoped></style>

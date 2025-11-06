@@ -8,6 +8,7 @@ import Material from '@primeuix/themes/material'
 import App from './App.vue'
 import router from './app/router'
 import './assets/fonts/fonts.css'
+import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
 
@@ -21,5 +22,6 @@ app.use(PrimeVue, {
     },
   },
 })
+app.directive('tooltip', Tooltip)
 
 app.mount('#app')

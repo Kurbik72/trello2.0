@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useToggle } from '@/shared/composables/use-toggle'
 
 interface IconButtonProps {
   icon: string
   isActive: boolean
+  tooltip?: string
 }
 
 const props = defineProps<IconButtonProps>()
@@ -23,7 +23,7 @@ const iconButtonClasses = computed(() => ({
 </script>
 
 <template>
-  <div :class="iconButtonClasses" @click="handleToggle">
+  <div :class="iconButtonClasses" @click="handleToggle" v-tooltip.bottom="props.tooltip">
     <i :class="props.icon" :style="{ color: '#6B7785' }"></i>
   </div>
 </template>
@@ -39,5 +39,14 @@ const iconButtonClasses = computed(() => ({
   background: #f4f5f7;
   cursor: pointer;
   transition: background 0.5s ease;
+}
+</style>
+
+<style>
+.p-tooltip {
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 200;
 }
 </style>
