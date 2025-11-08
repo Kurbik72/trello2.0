@@ -1,9 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HeaderForBoards from '@/modules/boards/createBoard/ui/headerForBoards.vue'
+</script>
 
 <template>
-  <div>
-    <h1>Boards</h1>
-  </div>
+  <header-for-boards />
 </template>
 
 <style scoped></style>

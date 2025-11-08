@@ -3,7 +3,10 @@ import Header from '@/widgets/header/ui/header.vue'
 </script>
 
 <template>
-  <Header />
+  <div class="default-layout">
+    <Header />
+    <slot />
+  </div>
 </template>
 
 <style scoped></style>
