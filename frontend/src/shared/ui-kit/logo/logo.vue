@@ -36,4 +36,9 @@ const isTitleVisible = computed(() => props.withTitle)
   line-height: 28px;
   letter-spacing: -0.27px;
 }
+@media (max-width: 500px) {
+  .logo-text {
+    display: none;
+  }
+}
 </style>
