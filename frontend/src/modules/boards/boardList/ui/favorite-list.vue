@@ -3,7 +3,7 @@
 <template>
   <div class="favorite-list">
     <h1 class="favorite-list-title">
-      <i class="pi pi-star" :style="{ color: '#EAB308' }" />Favorite List
+      <i class="pi pi-star-fill" :style="{ color: '#EAB308' }" />Favorite List
     </h1>
   </div>
 </template>
