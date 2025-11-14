@@ -7,6 +7,8 @@ const modelValue = defineModel<boolean>()
 
 <template>
   <modal-window v-model="modelValue" header="Create New Board" :style="{ width: '448px' }">
-    <template #content><preview-of-board /></template>
+    <template #content>
+      <preview-of-board />
+    </template>
   </modal-window>
 </template>
