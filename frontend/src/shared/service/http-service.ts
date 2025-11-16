@@ -17,7 +17,7 @@ interface RequestOptions<DataType> extends UseFetchOptions {
   mock: MockOptions<DataType>
 }
 
-export const httpService = async <DataType>(url: string, options: RequestOptions<DataType>) => {
+export const useHttpService = async <DataType>(url: string, options: RequestOptions<DataType>) => {
   if (options.mock.enabled) {
     const mockDelay = options.mock.delay || 1000
 
