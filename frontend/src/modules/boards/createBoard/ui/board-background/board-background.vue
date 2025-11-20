@@ -45,6 +45,7 @@ const handleSelect = (selectedBackground: DefaultBackground) => {
   flex-direction: column;
   justify-content: center;
   gap: 12px;
+  margin-top: 24px;
 }
 .board-background-title {
   color: #334155;
@@ -56,6 +57,8 @@ const handleSelect = (selectedBackground: DefaultBackground) => {
 }
 .board-background-items {
   display: flex;
+  flex-wrap: wrap;
+
   gap: 12px;
 }
 </style>

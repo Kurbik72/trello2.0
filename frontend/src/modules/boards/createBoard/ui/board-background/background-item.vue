@@ -38,6 +38,7 @@ const handleSelect = () => {
   cursor: pointer;
   overflow: hidden;
   opacity: 0.5;
+  flex: 1 0 calc(33.333% - 12px);
 }
 .background-item-image {
   width: 100%;
