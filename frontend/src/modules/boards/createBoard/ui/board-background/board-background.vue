@@ -1,0 +1,56 @@
+<script setup lang="ts">
+import BackgroundItem from './background-item.vue'
+
+interface DefaultBackground {
+  id: string
+  src: string
+}
+
+interface BoardBackgroundProps {
+  defaultBackgrounds: DefaultBackground[]
+  selectedId: string
+}
+
+defineProps<BoardBackgroundProps>()
+
+const emit = defineEmits<{
+  select: [background: DefaultBackground]
+}>()
+
+const handleSelect = (selectedBackground: DefaultBackground) => {
+  emit('select', selectedBackground)
+}
+</script>
+
+<template>
+  <div class="board-background">
+    <span class="board-background-title">Background</span>
+    <background-item
+      class="board-background-item"
+      v-for="background in defaultBackgrounds"
+      :key="background.id"
+      :src="background.src"
+      :selected-id
+      :id="background.id"
+      @select="handleSelect(background)"
+    />
+  </div>
+</template>
+
+<style scoped>
+.board-background {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+.board-background-title {
+  color: #334155;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+</style>

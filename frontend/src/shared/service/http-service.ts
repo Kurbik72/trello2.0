@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { useFetch, type UseFetchOptions } from '@vueuse/core'
 
 interface MockError {
   errorMessage: string
@@ -13,44 +13,25 @@ interface MockOptions<DataType> {
   enabled?: boolean
 }
 
-interface RequestOptions<DataType> {
-  mock?: MockOptions<DataType>
+interface RequestOptions<DataType> extends UseFetchOptions {
+  mock: MockOptions<DataType>
 }
 
-export const useHttpService = <DataType>(url: string, options: RequestOptions<DataType>) => {
-  // Mock режим
-  if (options.mock?.enabled) {
-    const isFetching = ref(true)
-    const error = ref<Error | null>(null)
-    const data = ref<DataType | null>(null)
+export const httpService = async <DataType>(url: string, options: RequestOptions<DataType>) => {
+  if (options.mock.enabled) {
+    const mockDelay = options.mock.delay || 1000
 
-    const execute = async () => {
-      isFetching.value = true
-      error.value = null
+    await new Promise((resolve) => setTimeout(resolve, mockDelay))
 
-      const mockDelay = options.mock!.delay || 1000
-      await new Promise((resolve) => setTimeout(resolve, mockDelay))
-
-      if (options.mock!.error) {
-        error.value = new Error(options.mock!.error.errorMessage)
-      } else {
-        data.value = options.mock!.data
-      }
-      isFetching.value = false
+    if (options.mock.error) {
+      throw {
+        errorMessage: options.mock.error?.errorMessage || 'Internal Server Error',
+        statusCode: options.mock.error?.statusCode || 500,
+      } as MockError
     }
 
-    // Автоматически выполняем запрос при создании
-    execute()
-
-    return {
-      data: computed(() => data.value),
-      error: computed(() => error.value),
-      isFetching: computed(() => isFetching.value),
-      execute,
-    }
+    return options.mock.data
   }
 
-  // Реальный режим
-  const { mock, ...fetchOptions } = options
-  return useFetch<DataType>(url, fetchOptions).json()
+  return useFetch(url, options)
 }

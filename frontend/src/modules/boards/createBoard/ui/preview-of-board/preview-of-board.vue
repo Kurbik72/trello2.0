@@ -1,31 +1,31 @@
 <script setup lang="ts">
 import previewColumns from './preview-columns.vue'
-import { getDefaultBackground } from '../../api/get-default-backgrounds'
-import { onMounted } from 'vue'
 
-const {} = getDefaultBackground()
+import { computed } from 'vue'
 
-onMounted(async () => {
-  await execute()
-})
+interface PreviewOfBoardProps {
+  src: string
+}
+
+const props = defineProps<PreviewOfBoardProps>()
+
+const previewImage = computed(() => `url(${props.src})`)
 </script>
 
 <template>
   <div class="preview-of-board">
-    <div v-if="isLoading">Loading...</div>
-    <div v-else-if="error">Error: {{ error.message }}</div>
-    <div v-else>
-      <preview-columns />
-      <div v-if="defaultBackgrounds">
-        <div v-for="bg in defaultBackgrounds" :key="bg.src">
-          <img :src="bg.src" alt="Background" />
-        </div>
-      </div>
-    </div>
+    <preview-columns />
   </div>
 </template>
 
 <style scoped>
 .preview-of-board {
+  width: 400px;
+  height: 225px;
+  padding: 16px;
+  background-image: v-bind(previewImage);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 </style>
