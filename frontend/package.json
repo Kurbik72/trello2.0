@@ -18,7 +18,7 @@
   "dependencies": {
     "@primeuix/themes": "^1.2.5",
     "@vueuse/core": "^14.0.0",
-    "axios": "^1.13.2",
+    "ofetch": "^1.5.1",
     "pinia": "^3.0.3",
     "primeicons": "^7.0.0",
     "primevue": "^4.4.1",
