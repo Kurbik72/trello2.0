@@ -25,15 +25,17 @@ const handleSelect = (selectedBackground: DefaultBackground) => {
 <template>
   <div class="board-background">
     <span class="board-background-title">Background</span>
-    <background-item
-      class="board-background-item"
-      v-for="background in defaultBackgrounds"
-      :key="background.id"
-      :src="background.src"
-      :selected-id
-      :id="background.id"
-      @select="handleSelect(background)"
-    />
+    <div class="board-background-items">
+      <background-item
+        class="board-background-item"
+        v-for="background in defaultBackgrounds"
+        :key="background.id"
+        :src="background.src"
+        :selected-id
+        :id="background.id"
+        @select="handleSelect(background)"
+      />
+    </div>
   </div>
 </template>
 
@@ -52,5 +54,11 @@ const handleSelect = (selectedBackground: DefaultBackground) => {
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+}
+.board-background-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 </style>
