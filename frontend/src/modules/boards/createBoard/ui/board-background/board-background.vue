@@ -42,7 +42,6 @@ const handleSelect = (selectedBackground: DefaultBackground) => {
 <style scoped>
 .board-background {
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
   gap: 12px;
@@ -57,8 +56,6 @@ const handleSelect = (selectedBackground: DefaultBackground) => {
 }
 .board-background-items {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 12px;
 }
 </style>

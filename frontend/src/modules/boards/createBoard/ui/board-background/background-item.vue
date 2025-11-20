@@ -37,15 +37,17 @@ const handleSelect = () => {
   border-radius: 8px;
   cursor: pointer;
   overflow: hidden;
+  opacity: 0.5;
 }
 .background-item-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
 }
 .background-item-selected {
-  border: 2px solid #635bff;
+  border: 3.5px solid #635bff;
+  scale: 1.1;
+  opacity: 1;
 }
 .background-item-selected::after {
   content: '';
