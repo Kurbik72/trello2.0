@@ -9,7 +9,7 @@ const attrs = useAttrs()
 
 <template>
   <Dialog v-model:visible="modelValue" modal :dismissableMask="true" v-bind="attrs">
-    <slot name="content" />
+    <slot name="content" class="modal-content" />
   </Dialog>
 </template>
 
@@ -28,5 +28,10 @@ const attrs = useAttrs()
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 </style>

@@ -1,5 +1,8 @@
 import { useFetch } from '@vueuse/core'
 import { ref } from 'vue'
+import defaultBackground1 from '@/assets/images/2.png'
+import defaultBackground2 from '@/assets/images/3.png'
+import defaultBackground3 from '@/assets/images/4.png'
 
 export interface DefaultBackground {
   id: string
@@ -9,15 +12,15 @@ export interface DefaultBackground {
 const mockData: DefaultBackground[] = [
   {
     id: '1',
-    src: 'https://picsum.photos/id/1/800/400',
+    src: defaultBackground1,
   },
   {
     id: '2',
-    src: 'https://picsum.photos/id/2/800/400',
+    src: defaultBackground2,
   },
   {
     id: '3',
-    src: 'https://picsum.photos/id/3/800/400',
+    src: defaultBackground3,
   },
 ]
 
