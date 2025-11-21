@@ -2,6 +2,7 @@
 import ModalWindow from '@/shared/ui-kit/modal-window/modal-window.vue'
 import PreviewOfBoard from './preview-of-board/preview-of-board.vue'
 import BoardBackground from './board-background/board-background.vue'
+import inputText from '@/shared/ui-kit/input/input.vue'
 import { computed, onMounted, reactive, watch } from 'vue'
 import { getDefaultBackground, type DefaultBackground } from '../api/get-default-backgrounds'
 const modelValue = defineModel<boolean>()
@@ -41,6 +42,12 @@ const previewSrc = computed(() => {
   <modal-window v-model="modelValue" header="Create New Board" :style="{ width: '448px' }">
     <template #content>
       <preview-of-board :src="previewSrc" />
+      <input-text
+        type="text"
+        placeholder="e.g., Q1 Marketing Plan"
+        label="Board title"
+        class="input-text"
+      />
       <board-background
         v-if="defaultBackgrounds"
         :default-backgrounds
@@ -50,3 +57,9 @@ const previewSrc = computed(() => {
     </template>
   </modal-window>
 </template>
+
+<style scoped>
+.input-text {
+  width: 100%;
+}
+</style>

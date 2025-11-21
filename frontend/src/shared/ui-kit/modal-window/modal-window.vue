@@ -29,7 +29,7 @@ const attrs = useAttrs()
   align-items: center;
   justify-content: space-between;
 }
-.modal-content {
+.p-dialog-content {
   display: flex;
   flex-direction: column;
   gap: 24px;
