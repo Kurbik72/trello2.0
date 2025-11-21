@@ -3,6 +3,8 @@ import ModalWindow from '@/shared/ui-kit/modal-window/modal-window.vue'
 import PreviewOfBoard from './preview-of-board/preview-of-board.vue'
 import BoardBackground from './board-background/board-background.vue'
 import inputText from '@/shared/ui-kit/input/input.vue'
+import actionButton from '@/shared/ui-kit/button/button.vue'
+
 import { computed, onMounted, reactive, watch } from 'vue'
 import { getDefaultBackground, type DefaultBackground } from '../api/get-default-backgrounds'
 const modelValue = defineModel<boolean>()
@@ -37,6 +39,10 @@ const previewSrc = computed(() => {
   )
   return selectedBackground?.src ?? defaultBackgrounds.value[0]?.src ?? ''
 })
+
+const handleCancel = () => {
+  modelValue.value = false
+}
 </script>
 
 <template>
@@ -56,6 +62,10 @@ const previewSrc = computed(() => {
         @select="handleSelect"
         :selectedId="form.boardBackgroundId"
       />
+      <div class="action-buttons">
+        <action-button severity="secondary" label="Cancel" @click="handleCancel" />
+        <action-button theme="purple" label="Create" />
+      </div>
     </template>
   </modal-window>
 </template>
@@ -63,5 +73,10 @@ const previewSrc = computed(() => {
 <style scoped>
 .input-text {
   width: 100%;
+}
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
 }
 </style>
