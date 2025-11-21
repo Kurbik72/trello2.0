@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CreateBoard from './create-button.vue'
+import buttonForOpenModalWindow from './button-for-open-modal-window.vue'
 import { useToggle } from '@/shared/composables/use-toggle'
 import CreateModalWindow from './create-modal-window.vue'
 const { isActive, setActive } = useToggle()
@@ -8,7 +8,7 @@ const { isActive, setActive } = useToggle()
 <template>
   <div class="header-for-boards">
     <h1 class="header-title">All Boards</h1>
-    <create-board @toggle="setActive" />
+    <button-for-open-modal-window @toggle="setActive" />
     <create-modal-window v-model="isActive" />
   </div>
 </template>

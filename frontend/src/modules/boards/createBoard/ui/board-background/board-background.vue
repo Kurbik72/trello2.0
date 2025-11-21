@@ -11,7 +11,7 @@ interface BoardBackgroundProps {
   selectedId: string
 }
 
-const props = defineProps<BoardBackgroundProps>()
+defineProps<BoardBackgroundProps>()
 
 const emit = defineEmits<{
   select: [background: DefaultBackground]
