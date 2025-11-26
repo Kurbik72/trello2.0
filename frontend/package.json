@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@primeuix/themes": "^1.2.5",
-    "@tanstack/vue-query": "^5.91.2",
     "@vueuse/core": "^14.0.0",
     "axios": "^1.13.2",
     "pinia": "^3.0.3",
