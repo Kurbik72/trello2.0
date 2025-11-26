@@ -4,7 +4,6 @@ import PrimeVue from 'primevue/config'
 import 'primeicons/primeicons.css'
 
 import Material from '@primeuix/themes/material'
-import { VueQueryPlugin } from '@tanstack/vue-query'
 import App from './App.vue'
 import router from './app/router'
 import './assets/fonts/fonts.css'
@@ -22,7 +21,6 @@ app.use(PrimeVue, {
     },
   },
 })
-app.use(VueQueryPlugin)
 app.directive('tooltip', Tooltip)
 
 app.mount('#app')
