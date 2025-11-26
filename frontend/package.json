@@ -19,6 +19,7 @@
     "@primeuix/themes": "^1.2.5",
     "@tanstack/vue-query": "^5.91.2",
     "@vueuse/core": "^14.0.0",
+    "axios": "^1.13.2",
     "ofetch": "^1.5.1",
     "pinia": "^3.0.3",
     "primeicons": "^7.0.0",

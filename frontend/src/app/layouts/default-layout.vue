@@ -5,8 +5,6 @@ import Header from '@/widgets/header/ui/header.vue'
 <template>
   <div class="default-layout">
     <Header />
-    <slot />
+    <slot class="default-layout-content" />
   </div>
 </template>
-
-<style scoped></style>

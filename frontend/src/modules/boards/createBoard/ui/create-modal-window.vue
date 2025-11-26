@@ -5,7 +5,7 @@ import BoardBackground from './board-background/board-background.vue'
 import inputText from '@/shared/ui-kit/input/input.vue'
 import actionButton from '@/shared/ui-kit/button/button.vue'
 
-import { computed, onMounted, reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { getDefaultBackground, type DefaultBackground } from '../api/get-default-backgrounds'
 const modelValue = defineModel<boolean>()
 
@@ -14,13 +14,16 @@ const form = reactive({
   boardTitle: '',
 })
 
-const { execute: getDefaultBackgrounds, data: defaultBackgrounds } = getDefaultBackground()
-onMounted(async () => {
-  await getDefaultBackgrounds()
+const { data: defaultBackgroundsData, execute: getDefaultBackgroundExecute } =
+  getDefaultBackground()
+watch(modelValue, async (newModalValue) => {
+  if (newModalValue) {
+    await getDefaultBackgroundExecute()
+  }
 })
 
 watch(
-  defaultBackgrounds,
+  defaultBackgroundsData,
   (backgrounds) => {
     if (backgrounds && backgrounds.length > 0 && !form.boardBackgroundId) {
       form.boardBackgroundId = backgrounds[0]?.id ?? ''
@@ -33,11 +36,10 @@ const handleSelect = (selectedBackground: DefaultBackground) => {
   form.boardBackgroundId = selectedBackground.id
 }
 const previewSrc = computed(() => {
-  if (!defaultBackgrounds.value) return ''
-  const selectedBackground = defaultBackgrounds.value.find(
+  const selectedBackground = defaultBackgroundsData.value?.find(
     (background) => background.id === form.boardBackgroundId,
   )
-  return selectedBackground?.src ?? defaultBackgrounds.value[0]?.src ?? ''
+  return selectedBackground?.src ?? defaultBackgroundsData.value?.[0]?.src ?? ''
 })
 
 const handleCancel = () => {
@@ -57,8 +59,8 @@ const handleCancel = () => {
         v-model="form.boardTitle"
       />
       <board-background
-        v-if="defaultBackgrounds"
-        :default-backgrounds
+        v-if="defaultBackgroundsData"
+        :default-backgrounds="defaultBackgroundsData"
         @select="handleSelect"
         :selectedId="form.boardBackgroundId"
       />

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { httpService } from '../service/http-service'
+import { apiClient, httpService } from '../service/http-service'
 import { useFetch } from '@vueuse/core'
 
 interface DashboardResponse {
@@ -16,9 +16,9 @@ interface DashboardRequest {
 export const useBoardsStore = defineStore('boards', () => {
   const boards = ref<DashboardResponse[]>([])
 
-  const saveBoard = async (board: DashboardRequest) => {
-    const { data: boardResponse } = await httpService.post<DashboardResponse[]>('/api/boards', {
-      body: JSON.stringify(board),
+  const saveBoard = async (board: DashboardResponse) => {
+    const response = await httpService<DashboardResponse[]>('/api/url', {
+      
     })
     boards.value = boardResponse.value ?? []
   }

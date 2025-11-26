@@ -1,5 +1,4 @@
-import { useFetch } from '@vueuse/core'
-import { ref } from 'vue'
+import { httpService } from '@/shared/service/http-service'
 
 export interface DefaultBackground {
   id: string
@@ -37,51 +36,11 @@ const mockData: DefaultBackground[] = [
   },
 ]
 
-const IS_USE_MOCK = true
-
-async function getMockResponse(): Promise<DefaultBackground[]> {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 500)
-  })
-
-  return mockData
-}
-
-export const getDefaultBackground = () => {
-  if (IS_USE_MOCK) {
-    const data = ref<DefaultBackground[] | null>(null)
-    const isFetching = ref(true)
-    const error = ref<Error | null>(null)
-
-    getMockResponse()
-      .then((result) => {
-        data.value = result
-        isFetching.value = false
-      })
-      .catch((err) => {
-        error.value = err
-        isFetching.value = false
-      })
-
-    return {
-      data,
-      isFetching,
-      error,
-      execute: async () => {
-        isFetching.value = true
-        error.value = null
-        try {
-          data.value = await getMockResponse()
-        } catch (err) {
-          error.value = err as Error
-        } finally {
-          isFetching.value = false
-        }
-      },
-    }
-  }
-
-  return useFetch<DefaultBackground[]>('/api/default-backgrounds', {
+export const getDefaultBackground = () =>
+  httpService<DefaultBackground[]>('/api/default-backgrounds', {
     method: 'GET',
+    mock: {
+      data: mockData,
+      enabled: false,
+    },
   })
-}
