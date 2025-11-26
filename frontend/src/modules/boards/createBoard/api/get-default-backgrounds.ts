@@ -41,6 +41,6 @@ export const getDefaultBackground = () =>
     method: 'GET',
     mock: {
       data: mockData,
-      enabled: false,
+      enabled: true,
     },
   })
