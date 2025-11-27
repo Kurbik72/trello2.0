@@ -4,9 +4,9 @@ import PreviewOfBoard from './preview-of-board/preview-of-board.vue'
 import BoardBackground from './board-background/board-background.vue'
 import inputText from '@/shared/ui-kit/input/input.vue'
 import actionButton from '@/shared/ui-kit/button/button.vue'
-
 import { computed, reactive, watch } from 'vue'
 import { getDefaultBackground, type DefaultBackground } from '../api/get-default-backgrounds'
+
 const modelValue = defineModel<boolean>()
 
 const form = reactive({
@@ -16,9 +16,9 @@ const form = reactive({
 
 const { data: defaultBackgroundsData, execute: getDefaultBackgroundExecute } =
   getDefaultBackground()
-watch(modelValue, async (newModalValue) => {
-  if (newModalValue) {
-    await getDefaultBackgroundExecute()
+watch(modelValue, () => {
+  if (modelValue.value) {
+    getDefaultBackgroundExecute()
   }
 })
 
