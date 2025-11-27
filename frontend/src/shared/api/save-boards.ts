@@ -1,7 +1,8 @@
 import { httpService } from '../service/http-service'
 
-interface SaveFavoriteBoardRequest {
-  boardId: string
+interface SaveBoardRequest {
+  title: string
+  backgroundId: string
 }
 
 interface BoardInterface {
@@ -11,8 +12,8 @@ interface BoardInterface {
   linkToBoard: string
   backgroundSrc: string
 }
-export const saveFavoriteBoard = (body: SaveFavoriteBoardRequest) =>
-  httpService<BoardInterface>('/api/save-favorite-board', {
-    method: 'PATCH',
+export const saveBoards = (body: SaveBoardRequest) =>
+  httpService<BoardInterface>('/api/save-board', {
+    method: 'POST',
     body: body,
   })
