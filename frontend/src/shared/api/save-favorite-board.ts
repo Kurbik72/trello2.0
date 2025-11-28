@@ -15,4 +15,7 @@ export const saveFavoriteBoard = (body: SaveFavoriteBoardRequest) =>
   httpService<BoardInterface>('/api/save-favorite-board', {
     method: 'PATCH',
     body: body,
+    mock: {
+      enabled: true,
+    },
   })

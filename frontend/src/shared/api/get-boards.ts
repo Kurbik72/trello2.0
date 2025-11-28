@@ -14,21 +14,21 @@ const mockData: GetBoardsResponse[] = [
     title: 'Board 1',
     isFavorite: false,
     linkToBoard: 'https://board1.com',
-    backgroundSrc: 'https://board1.com/background.png',
+    backgroundSrc: 'https://picsum.photos/id/100/800/400',
   },
   {
     id: '2',
     title: 'Board 2',
     isFavorite: false,
     linkToBoard: 'https://board2.com',
-    backgroundSrc: 'https://board2.com/background.png',
+    backgroundSrc: 'https://picsum.photos/id/200/800/400',
   },
   {
     id: '3',
     title: 'Board 3',
     isFavorite: false,
     linkToBoard: 'https://board3.com',
-    backgroundSrc: 'https://board3.com/background.png',
+    backgroundSrc: 'https://picsum.photos/id/400/800/400',
   },
 ]
 export const getBoards = (user_id: string) =>

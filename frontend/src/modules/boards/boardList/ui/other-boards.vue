@@ -1,8 +1,37 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BoardCard from './board-card/board-card.vue'
+import { useBoardsStore } from '@/shared/stores/boards'
+import { onMounted } from 'vue'
+
+const boardsStore = useBoardsStore()
+
+onMounted(async () => {
+  await boardsStore.getBoardsList('1')
+})
+const toggleFavorite = async (boardId: string) => {
+  const toggleFavoriteStar = boardsStore.boards.find((board) => board.id === boardId)
+  if (toggleFavoriteStar) {
+    toggleFavoriteStar.isFavorite = !toggleFavoriteStar.isFavorite
+  }
+  await boardsStore.favoriteBoardList(boardId)
+}
+</script>
 
 <template>
   <div class="other-boards">
     <h1 class="other-boards-title"><i class="pi pi-align-justify" />Other Boards</h1>
+    <div class="board-cards">
+      <board-card
+        v-for="board in boardsStore.boards"
+        :key="board.id"
+        :id="board.id"
+        :title="board.title"
+        :isFavorite="board.isFavorite"
+        :linkToBoard="board.linkToBoard"
+        :backgroundSrc="board.backgroundSrc"
+        @toggleFavorite="toggleFavorite(board.id)"
+      />
+    </div>
   </div>
 </template>
 
@@ -17,5 +46,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: 28px;
+}
+.board-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 </style>
