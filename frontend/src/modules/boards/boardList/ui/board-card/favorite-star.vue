@@ -30,7 +30,18 @@ const iconClasses = computed(() => ({
 
 <style scoped>
 .favorite-star {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+}
+
+.favorite-star:hover {
+  background: #f4f5f7;
+  border-radius: 6px;
+  transition: background 0.3s ease;
 }
 .star-active {
   color: #eab308;
