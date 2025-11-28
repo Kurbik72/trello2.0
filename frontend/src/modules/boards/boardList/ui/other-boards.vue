@@ -36,6 +36,11 @@ const toggleFavorite = async (boardId: string) => {
 </template>
 
 <style scoped>
+.other-boards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 .other-boards-title {
   display: flex;
   align-items: center;

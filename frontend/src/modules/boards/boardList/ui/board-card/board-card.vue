@@ -21,6 +21,12 @@ const emit = defineEmits<{
 const handleToggleFavorite = () => {
   emit('toggleFavorite')
 }
+
+const favoriteStarClasses = computed(() => ({
+  'favorite-star': true,
+  'favorite-star-active': props.isFavorite,
+  'favorite-star-inactive': !props.isFavorite,
+}))
 </script>
 
 <template>
@@ -28,7 +34,7 @@ const handleToggleFavorite = () => {
     <favorite-star
       :isFavorite="props.isFavorite"
       @toggle="handleToggleFavorite"
-      class="favorite-star"
+      :class="favoriteStarClasses"
     />
     <h1 class="board-card-title">{{ props.title }}</h1>
   </div>
@@ -51,16 +57,13 @@ const handleToggleFavorite = () => {
   top: 16px;
   right: 16px;
 }
-.board-card:hover .favorite-star {
+
+.favorite-star-active {
   transform: translateX(0);
 }
-@keyframes star-animation {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+
+.board-card:hover .favorite-star-inactive {
+  transform: translateX(0);
 }
 .board-card-title {
   font-family: 'Inter';
