@@ -42,11 +42,25 @@ const handleToggleFavorite = () => {
   width: 350px;
   height: 160px;
   padding: 16px;
+  overflow: hidden;
 }
 .favorite-star {
+  transform: translateX(200%);
+  transition: transform 0.3s ease;
   position: absolute;
   top: 16px;
   right: 16px;
+}
+.board-card:hover .favorite-star {
+  transform: translateX(0);
+}
+@keyframes star-animation {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 .board-card-title {
   font-family: 'Inter';

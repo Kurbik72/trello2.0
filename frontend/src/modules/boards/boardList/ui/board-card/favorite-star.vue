@@ -38,10 +38,9 @@ const iconClasses = computed(() => ({
   cursor: pointer;
 }
 
-.favorite-star:hover {
+.favorite-star {
   background: #f4f5f7;
   border-radius: 6px;
-  transition: background 0.3s ease;
 }
 .star-active {
   color: #eab308;
