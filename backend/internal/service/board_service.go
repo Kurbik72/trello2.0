@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/google/uuid"
 	"trello-backend/internal/models"
 	"trello-backend/internal/repository"
 )
@@ -40,10 +41,14 @@ func (s *boardService) CreateBoard(userID string, req *models.SaveBoardRequest) 
 		return nil, fmt.Errorf("background not found: %w", err)
 	}
 
-	// Генерируем ссылку на доску
-	linkToBoard := s.generateBoardLink()
+	// Генерируем UUID для доски
+	boardID := uuid.New().String()
+	
+	// Генерируем ссылку на доску с реальным ID
+	linkToBoard := s.generateBoardLink(boardID)
 
 	board := &models.Board{
+		ID:            boardID,
 		Title:         strings.TrimSpace(req.Title),
 		IsFavorite:    false,
 		LinkToBoard:   linkToBoard,
@@ -121,9 +126,8 @@ func (s *boardService) DeleteBoard(boardID string, userID string) error {
 	return nil
 }
 
-func (s *boardService) generateBoardLink() string {
-	// Генерируем уникальную ссылку на доску
-	// UUID будет сгенерирован в Prisma при создании записи
-	return "/board/temp"
+func (s *boardService) generateBoardLink(boardID string) string {
+	// Генерируем уникальную ссылку на доску с реальным ID
+	return fmt.Sprintf("/board/%s", boardID)
 }
 

@@ -25,6 +25,11 @@ func NewBoardRepository(db *database.DB) BoardRepository {
 }
 
 func (r *boardRepository) Create(board *models.Board) error {
+	// Проверяем, что ID установлен
+	if board.ID == "" {
+		return fmt.Errorf("board ID is required")
+	}
+	
 	if err := r.db.Create(board).Error; err != nil {
 		return fmt.Errorf("failed to create board: %w", err)
 	}

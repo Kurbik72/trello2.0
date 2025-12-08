@@ -25,6 +25,9 @@ func SetupRouter(
 	// JWT Manager
 	jwtManager := jwt.NewJWTManager(cfg.JWT.Secret, cfg.JWT.GetAccessTokenExpiration())
 
+	// Static files (изображения)
+	r.Static("/static", "./static")
+
 	// API routes
 	api := r.Group("/api")
 	{

@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"trello-backend/internal/models"
 	"trello-backend/internal/service"
 )
@@ -101,7 +102,7 @@ func (h *BoardHandler) CreateBoard(c *gin.Context) {
 		}
 		
 		// Обработка ошибок валидации
-		if validationErr, ok := err.(gin.ValidationErrors); ok {
+		if validationErr, ok := err.(validator.ValidationErrors); ok {
 			errors := make(map[string]string)
 			for _, fieldErr := range validationErr {
 				fieldName := fieldErr.Field()
