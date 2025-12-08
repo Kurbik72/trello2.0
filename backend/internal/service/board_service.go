@@ -43,6 +43,9 @@ func (s *boardService) CreateBoard(userID string, req *models.SaveBoardRequest) 
 
 	// Генерируем UUID для доски
 	boardID := uuid.New().String()
+	if boardID == "" {
+		return nil, fmt.Errorf("failed to generate board ID")
+	}
 	
 	// Генерируем ссылку на доску с реальным ID
 	linkToBoard := s.generateBoardLink(boardID)
@@ -57,8 +60,18 @@ func (s *boardService) CreateBoard(userID string, req *models.SaveBoardRequest) 
 		BackgroundID:  &backgroundID,
 	}
 
+	// Дополнительная проверка перед сохранением
+	if board.ID == "" {
+		return nil, fmt.Errorf("board ID is empty before save")
+	}
+
 	if err := s.boardRepo.Create(board); err != nil {
 		return nil, fmt.Errorf("failed to create board: %w", err)
+	}
+	
+	// Проверяем, что ID сохранился
+	if board.ID == "" {
+		return nil, fmt.Errorf("board ID was lost after save")
 	}
 
 	return models.BoardToResponse(board), nil
