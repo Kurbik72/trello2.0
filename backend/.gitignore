@@ -1,5 +1,29 @@
 node_modules
 # Keep environment variables out of version control
 .env
+.env.local
 
 /generated/prisma
+
+# Go
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+go.work.sum
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

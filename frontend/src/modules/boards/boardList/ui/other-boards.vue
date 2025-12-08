@@ -2,11 +2,13 @@
 import BoardCard from './board-card/board-card.vue'
 import { useBoardsStore } from '@/shared/stores/boards'
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const boardsStore = useBoardsStore()
 
 onMounted(async () => {
-  await boardsStore.getBoardsList('1')
+  await boardsStore.getBoardsList((route.query.user_id as string) ?? '')
 })
 const toggleFavorite = async (boardId: string) => {
   const toggleFavoriteStar = boardsStore.boards.find((board) => board.id === boardId)

@@ -32,10 +32,10 @@ const mockData: GetBoardsResponse[] = [
   },
 ]
 export const getBoards = (user_id: string) =>
-  httpService<GetBoardsResponse[]>(`/api/get-boards/?user_id=${user_id}`, {
+  httpService<GetBoardsResponse[]>(`/api/get-boards?user_id=${user_id}`, {
     method: 'GET',
     mock: {
       data: mockData,
-      enabled: true,
+      enabled: false,
     },
   })

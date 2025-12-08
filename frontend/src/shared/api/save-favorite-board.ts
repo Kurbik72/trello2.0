@@ -16,6 +16,6 @@ export const saveFavoriteBoard = (body: SaveFavoriteBoardRequest) =>
     method: 'PATCH',
     body: body,
     mock: {
-      enabled: true,
+      enabled: false,
     },
   })

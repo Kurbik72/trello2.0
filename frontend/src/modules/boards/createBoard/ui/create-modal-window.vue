@@ -6,6 +6,8 @@ import inputText from '@/shared/ui-kit/input/input.vue'
 import actionButton from '@/shared/ui-kit/button/button.vue'
 import { computed, reactive, watch } from 'vue'
 import { getDefaultBackground, type DefaultBackground } from '../api/get-default-backgrounds'
+import { useBoardsStore } from '@/shared/stores/boards'
+import { useRoute } from 'vue-router'
 
 const modelValue = defineModel<boolean>()
 
@@ -45,6 +47,17 @@ const previewSrc = computed(() => {
 const handleCancel = () => {
   modelValue.value = false
 }
+
+const route = useRoute()
+const boardStore = useBoardsStore()
+
+const handleCreate = async () => {
+  await boardStore.saveBoard({
+    title: form.boardTitle,
+    backgroundId: form.boardBackgroundId,
+    user_id: route.query.user_id as string,
+  })
+}
 </script>
 
 <template>
@@ -66,7 +79,7 @@ const handleCancel = () => {
       />
       <div class="action-buttons">
         <action-button severity="secondary" label="Cancel" @click="handleCancel" />
-        <action-button theme="purple" label="Create" />
+        <action-button theme="purple" label="Create" @click="handleCreate" />
       </div>
     </template>
   </modal-window>

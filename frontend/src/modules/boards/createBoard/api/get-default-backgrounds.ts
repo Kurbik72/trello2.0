@@ -7,7 +7,7 @@ export interface DefaultBackground {
 
 const mockData: DefaultBackground[] = [
   {
-    id: '1',
+    id: '6949e844-9b4b-4dec-9d42-2d4216415f53',
     src: 'https://picsum.photos/id/100/800/400',
   },
   {

@@ -7,6 +7,7 @@ import { saveFavoriteBoard } from '../api/save-favorite-board'
 interface SaveBoardRequest {
   title: string
   backgroundId: string
+  user_id: string
 }
 
 interface BoardInterface {

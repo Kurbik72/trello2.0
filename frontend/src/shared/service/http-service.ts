@@ -63,9 +63,13 @@ export const httpService = <ResponseType, BodyType = unknown>(
         return
       }
 
+      // Преобразуем body в data для axios
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { body, mock, ...axiosConfig } = options
       const response = await apiClient.request<ResponseType>({
         url,
-        ...options,
+        ...axiosConfig,
+        data: body, // axios использует data вместо body
       })
       data.value = response.data
     } catch (err) {

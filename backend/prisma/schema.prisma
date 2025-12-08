@@ -12,3 +12,43 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  refreshToken String?   @map("refresh_token")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  
+  boards       Board[]
+
+  @@map("users")
+}
+
+model Board {
+  id              String    @id @default(uuid())
+  title           String
+  isFavorite      Boolean   @default(false) @map("is_favorite")
+  linkToBoard     String    @map("link_to_board")
+  backgroundSrc   String    @map("background_src")
+  userId          String    @map("user_id")
+  backgroundId    String?   @map("background_id")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  background      DefaultBackground? @relation(fields: [backgroundId], references: [id], onDelete: SetNull)
+
+  @@map("boards")
+}
+
+model DefaultBackground {
+  id        String    @id @default(uuid())
+  src       String
+  createdAt DateTime  @default(now()) @map("created_at")
+  
+  boards    Board[]
+
+  @@map("default_backgrounds")
+}
