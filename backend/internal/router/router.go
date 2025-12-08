@@ -35,13 +35,8 @@ func SetupRouter(
 		api.GET("/default-backgrounds", backgroundHandler.GetDefaultBackgrounds)
 		// Временно убрана авторизация для save-board
 		api.POST("/save-board", boardHandler.CreateBoard)
-
-		// Protected routes (require authentication)
-		protected := api.Group("")
-		protected.Use(middleware.AuthMiddleware(jwtManager))
-		{
-			protected.PATCH("/save-favorite-board", boardHandler.ToggleFavorite)
-		}
+		// Временно убрана авторизация для save-favorite-board
+		api.PATCH("/save-favorite-board", boardHandler.ToggleFavorite)
 
 		// Routes with optional authentication (for backward compatibility)
 		api.GET("/get-boards", middleware.OptionalAuthMiddleware(jwtManager), boardHandler.GetBoards)

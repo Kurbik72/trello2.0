@@ -42,8 +42,8 @@ export const useBoardsStore = defineStore('boards', () => {
     }
   }
 
-  const favoriteBoardList = async (board_id: string) => {
-    const { error, execute, data } = saveFavoriteBoard({ boardId: board_id })
+  const favoriteBoardList = async (board_id: string, user_id: string) => {
+    const { error, execute, data } = saveFavoriteBoard({ boardId: board_id, user_id: user_id })
     await execute()
     if (error.value) {
       throw new Error(error.value.errorMessage)

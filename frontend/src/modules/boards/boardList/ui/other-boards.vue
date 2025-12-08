@@ -15,7 +15,7 @@ const toggleFavorite = async (boardId: string) => {
   if (toggleFavoriteStar) {
     toggleFavoriteStar.isFavorite = !toggleFavoriteStar.isFavorite
   }
-  await boardsStore.favoriteBoardList(boardId)
+  await boardsStore.favoriteBoardList(boardId, route.query.user_id as string)
 }
 </script>
 

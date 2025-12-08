@@ -2,6 +2,7 @@ import { httpService } from '../service/http-service'
 
 interface SaveFavoriteBoardRequest {
   boardId: string
+  user_id: string
 }
 
 interface BoardInterface {

@@ -180,24 +180,18 @@ func (h *BoardHandler) ToggleFavorite(c *gin.Context) {
 
 	boardID := req.BoardID
 	if boardID == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "board_id is required"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "boardId is required"})
 		return
 	}
 
-	// Получаем userID из контекста
-	userID, exists := c.Get("userID")
-	if !exists {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "user not authenticated"})
+	// Получаем userID из body запроса
+	userID := req.UserID
+	if userID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "user_id is required"})
 		return
 	}
 
-	userIDStr, ok := userID.(string)
-	if !ok {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "invalid user ID type"})
-		return
-	}
-
-	board, err := h.boardService.ToggleFavorite(boardID, userIDStr)
+	board, err := h.boardService.ToggleFavorite(boardID, userID)
 	if err != nil {
 		if err.Error() == "board not found" {
 			c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})

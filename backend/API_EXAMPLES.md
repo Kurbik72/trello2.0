@@ -80,10 +80,10 @@ curl -X POST \
 ```bash
 curl -X PATCH \
   http://localhost:8080/api/save-favorite-board \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "boardId": "550e8400-e29b-41d4-a716-446655440000"
+    "boardId": "550e8400-e29b-41d4-a716-446655440000",
+    "user_id": "6949e844-9b4b-4dec-9d42-2d4216415f53"
   }'
 ```
 

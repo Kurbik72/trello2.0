@@ -9,6 +9,7 @@ type SaveBoardRequest struct {
 
 type SaveFavoriteBoardRequest struct {
 	BoardID string `json:"boardId" binding:"required,uuid"`
+	UserID  string `json:"user_id" binding:"required,uuid"`
 }
 
 // Response DTOs
