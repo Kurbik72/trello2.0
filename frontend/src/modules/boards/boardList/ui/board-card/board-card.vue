@@ -43,6 +43,7 @@ const favoriteStarClasses = computed(() => ({
 <style scoped>
 .board-card {
   background-image: v-bind(backgroundImage);
+  background-size: cover;
   position: relative;
   display: flex;
   width: 350px;
