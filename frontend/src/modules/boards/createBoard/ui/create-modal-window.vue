@@ -8,9 +8,14 @@ import { computed, reactive, watch } from 'vue'
 import { getDefaultBackground, type DefaultBackground } from '../api/get-default-backgrounds'
 import { useBoardsStore } from '@/shared/stores/boards'
 import { useRoute } from 'vue-router'
+import { validateService, validationSchemas } from '@/shared/service/zod-validation'
 
 const modelValue = defineModel<boolean>()
 
+interface FormInterface {
+  boardBackgroundId: string
+  boardTitle: string
+}
 const form = reactive({
   boardBackgroundId: '',
   boardTitle: '',
@@ -52,6 +57,17 @@ const route = useRoute()
 const boardStore = useBoardsStore()
 
 const handleCreate = async () => {
+  const validationResult = validateService<FormInterface>(
+    form,
+    validationSchemas.pick({
+      email: true,
+      code: true,
+      required: true,
+      minLength: 1,
+      maxLength: 100,
+    }),
+  )
+  if (!validationResult.success) return
   await boardStore.saveBoard({
     title: form.boardTitle,
     backgroundId: form.boardBackgroundId,
@@ -70,6 +86,7 @@ const handleCreate = async () => {
         label="Board title"
         class="input-text"
         v-model="form.boardTitle"
+        :error="vali"
       />
       <board-background
         v-if="defaultBackgroundsData"

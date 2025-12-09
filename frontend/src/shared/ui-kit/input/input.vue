@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Message } from 'primevue'
 import InputText from 'primevue/inputtext'
 import { useAttrs } from 'vue'
 
@@ -6,6 +7,7 @@ const attrs = useAttrs()
 
 defineProps<{
   label: string
+  error?: string
 }>()
 </script>
 
@@ -13,6 +15,7 @@ defineProps<{
   <div class="input">
     <label for="input" class="input-label">{{ label }}</label>
     <InputText v-bind="attrs" />
+    <Message v-if="error" severity="error" size="small" variant="simple">{{ error }}</Message>
   </div>
 </template>
 
