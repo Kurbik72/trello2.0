@@ -13,6 +13,7 @@ type BoardRepository interface {
 	GetByID(id string) (*models.Board, error)
 	GetByUserID(userID string) ([]models.Board, error)
 	Update(board *models.Board) error
+	UpdateFavorite(boardID string, isFavorite bool) error
 	Delete(id string) error
 }
 
@@ -63,6 +64,21 @@ func (r *boardRepository) Update(board *models.Board) error {
 	
 	if result.Error != nil {
 		return fmt.Errorf("failed to update board: %w", result.Error)
+	}
+	
+	if result.RowsAffected == 0 {
+		return errors.New("board not found")
+	}
+	
+	return nil
+}
+
+// UpdateFavorite обновляет только статус избранного для доски
+func (r *boardRepository) UpdateFavorite(boardID string, isFavorite bool) error {
+	result := r.db.Model(&models.Board{}).Where("id = ?", boardID).Update("is_favorite", isFavorite)
+	
+	if result.Error != nil {
+		return fmt.Errorf("failed to update favorite status: %w", result.Error)
 	}
 	
 	if result.RowsAffected == 0 {

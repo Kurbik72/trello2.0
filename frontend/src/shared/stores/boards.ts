@@ -48,11 +48,10 @@ export const useBoardsStore = defineStore('boards', () => {
     if (error.value) {
       throw new Error(error.value.errorMessage)
     }
-    if (data.value) {
-      boards.value = boards.value.map((favoriteBoard) =>
-        favoriteBoard.id === board_id ? data.value! : favoriteBoard,
-      )
-    }
+    if (!data.value) return
+    boards.value = boards.value.map((board) =>
+      board.id === board_id ? { ...board, ...data.value } : board,
+    )
   }
   return { boards, saveBoard, getBoardsList, favoriteBoardList }
 })

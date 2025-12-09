@@ -7,7 +7,7 @@ const { isActive, setActive } = useToggle()
 
 <template>
   <div class="header-for-boards">
-    <h1 class="header-title">All Boards</h1>
+    <h1 class="header-title">Dashboard</h1>
     <button-for-open-modal-window @toggle="setActive" />
     <create-modal-window v-model="isActive" />
   </div>

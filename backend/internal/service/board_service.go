@@ -98,11 +98,15 @@ func (s *boardService) ToggleFavorite(boardID string, userID string) (*models.Bo
 	}
 
 	// Переключаем статус избранного
-	board.IsFavorite = !board.IsFavorite
+	newFavoriteStatus := !board.IsFavorite
 
-	if err := s.boardRepo.Update(board); err != nil {
-		return nil, fmt.Errorf("failed to update board: %w", err)
+	// Обновляем только статус избранного, не трогая другие поля
+	if err := s.boardRepo.UpdateFavorite(boardID, newFavoriteStatus); err != nil {
+		return nil, fmt.Errorf("failed to update favorite status: %w", err)
 	}
+
+	// Обновляем статус в объекте для ответа
+	board.IsFavorite = newFavoriteStatus
 
 	return models.BoardToResponse(board), nil
 }
