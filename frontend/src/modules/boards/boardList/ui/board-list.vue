@@ -80,4 +80,3 @@ const displayBoards = computed(() => {
   gap: 16px;
 }
 </style>
-
