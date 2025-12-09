@@ -25,7 +25,7 @@ const buttonClasses = computed(() => ({
   font-size: 16px;
   padding: 8px 16px;
   font-weight: 500;
-  border-radius: 0px;
+  border-radius: 5px;
 }
 .p-button:hover {
   border: none !important;

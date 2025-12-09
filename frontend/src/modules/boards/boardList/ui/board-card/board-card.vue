@@ -50,6 +50,7 @@ const favoriteStarClasses = computed(() => ({
   height: 160px;
   padding: 16px;
   overflow: hidden;
+  border-radius: 8px;
 }
 .favorite-star {
   transform: translateX(200%);
