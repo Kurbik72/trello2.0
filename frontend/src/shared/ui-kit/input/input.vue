@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import type { Message } from 'primevue'
+import Message from 'primevue/message'
 import InputText from 'primevue/inputtext'
-import { useAttrs } from 'vue'
+import { useAttrs, computed } from 'vue'
 
 const attrs = useAttrs()
 
-defineProps<{
+const props = defineProps<{
   label: string
   error?: string
 }>()
+
+const inputClasses = computed(() => ({
+  'p-error': props.error,
+}))
 </script>
 
 <template>
   <div class="input">
     <label for="input" class="input-label">{{ label }}</label>
-    <InputText v-bind="attrs" />
+    <InputText v-bind="attrs" :class="inputClasses" />
     <Message v-if="error" severity="error" size="small" variant="simple">{{ error }}</Message>
   </div>
 </template>
@@ -41,11 +45,27 @@ defineProps<{
   border-color: rgb(145, 145, 145);
   outline: none;
 }
+.p-inputtext.p-error {
+  border-color: #e24c4c;
+}
+.p-inputtext.p-error:enabled:hover,
+.p-inputtext.p-error:enabled:focus {
+  border-color: #e24c4c;
+}
 .input-label {
   font-family: 'Inter';
   color: #334155;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
+}
+</style>
+
+<style>
+.p-message-sm .p-message-text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
 }
 </style>

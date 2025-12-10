@@ -8,24 +8,33 @@ import { computed, reactive, watch } from 'vue'
 import { getDefaultBackground, type DefaultBackground } from '../api/get-default-backgrounds'
 import { useBoardsStore } from '@/shared/stores/boards'
 import { useRoute } from 'vue-router'
-import { validateService, validationSchemas } from '@/shared/service/zod-validation'
+import * as v from 'valibot'
+import { useFormValidation } from '@/shared/composables/use-form-validation'
 
 const modelValue = defineModel<boolean>()
 
-interface FormInterface {
-  boardBackgroundId: string
-  boardTitle: string
-}
 const form = reactive({
   boardBackgroundId: '',
   boardTitle: '',
 })
+
+const FormSchema = v.object({
+  boardTitle: v.pipe(
+    v.string('Введите строку'),
+    v.nonEmpty('Поле обязательно для заполнения'),
+    v.minLength(3, 'Минимум 3 символа'),
+  ),
+  boardBackgroundId: v.pipe(v.string('Введите строку'), v.nonEmpty('Выберите фон')),
+})
+
+const { errors, validate, clearErrors } = useFormValidation(FormSchema)
 
 const { data: defaultBackgroundsData, execute: getDefaultBackgroundExecute } =
   getDefaultBackground()
 watch(modelValue, () => {
   if (modelValue.value) {
     getDefaultBackgroundExecute()
+    clearErrors()
   }
 })
 
@@ -57,22 +66,18 @@ const route = useRoute()
 const boardStore = useBoardsStore()
 
 const handleCreate = async () => {
-  const validationResult = validateService<FormInterface>(
-    form,
-    validationSchemas.pick({
-      email: true,
-      code: true,
-      required: true,
-      minLength: 1,
-      maxLength: 100,
-    }),
-  )
-  if (!validationResult.success) return
+  if (!validate(form)) {
+    return
+  }
+
   await boardStore.saveBoard({
     title: form.boardTitle,
     backgroundId: form.boardBackgroundId,
     user_id: route.query.user_id as string,
   })
+
+  modelValue.value = false
+  form.boardTitle = ''
 }
 </script>
 
@@ -86,7 +91,7 @@ const handleCreate = async () => {
         label="Board title"
         class="input-text"
         v-model="form.boardTitle"
-        :error="vali"
+        :error="errors.boardTitle"
       />
       <board-background
         v-if="defaultBackgroundsData"
