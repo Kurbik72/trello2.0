@@ -15,8 +15,8 @@ export const useFormValidation = <TSchema extends v.GenericSchema, TForm = v.Inf
 
     if (!result.success) {
       for (const issue of result.issues) {
-        const field = issue.path?.[0]?.key as keyof TForm
-        if (field) {
+        if (issue) {
+          const field = issue.path?.[0]?.key as keyof TForm
           errors.value[field] = issue.message
         }
       }
@@ -36,3 +36,4 @@ export const useFormValidation = <TSchema extends v.GenericSchema, TForm = v.Inf
     clearErrors,
   }
 }
+// TODO: СДЕЛАТЬ ТИПИЗИАЦИЮ ЧЕРЕЗ ДЖЕНЕРИКИ А НЕ as keyof TForm

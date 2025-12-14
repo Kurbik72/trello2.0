@@ -19,11 +19,7 @@ const form = reactive({
 })
 
 const FormSchema = v.object({
-  boardTitle: v.pipe(
-    v.string('Введите строку'),
-    v.nonEmpty('Поле обязательно для заполнения'),
-    v.minLength(3, 'Минимум 3 символа'),
-  ),
+  boardTitle: v.pipe(v.string('Введите строку'), v.minLength(7, 'Минимум 7 символов')),
   boardBackgroundId: v.pipe(v.string('Введите строку'), v.nonEmpty('Выберите фон')),
 })
 
