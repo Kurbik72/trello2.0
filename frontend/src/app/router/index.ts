@@ -7,6 +7,20 @@ const router = createRouter({
       path: '/boards',
       component: () => import('@/pages/boards/boards.vue'),
     },
+    {
+      path: '/auth',
+      redirect: '/auth/login',
+      children: [
+        {
+          path: 'login',
+          component: () => import('@/pages/auth/login.vue'),
+        },
+        {
+          path: 'register',
+          component: () => import('@/pages/auth/register.vue'),
+        },
+      ],
+    },
   ],
 })
 
