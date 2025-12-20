@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { iconIds } from '@/shared/constants/IconIds'
+import { iconIds } from '@/shared/constants/iconIds'
 import { defineAsyncComponent, shallowRef, toRefs, watchEffect } from 'vue'
 
 interface IconProps {

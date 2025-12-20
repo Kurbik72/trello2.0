@@ -17,5 +17,8 @@
     #ecebff 70%,
     #e6e4ff 100%
   );
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
