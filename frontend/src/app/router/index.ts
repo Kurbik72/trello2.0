@@ -9,6 +9,7 @@ const router = createRouter({
     },
     {
       path: '/auth',
+      component: () => import('@/pages/auth/auth.vue'),
       redirect: '/auth/login',
       children: [
         {

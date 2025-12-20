@@ -1,3 +1,12 @@
 <script setup lang="ts"></script>
 
-<template></template>
+<template>
+  <div class="authorization-form">
+    <slot name="header" />
+  </div>
+</template>
+
+<style scoped>
+.authorization-form {
+}
+</style>
