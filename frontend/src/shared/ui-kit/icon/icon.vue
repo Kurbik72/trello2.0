@@ -29,6 +29,9 @@ const styleIcon = computed(() => ['icon', `${props.primeVueIcon}`])
 
 <style scoped>
 .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: v-bind('sizeOfIcon.width');
   height: v-bind('sizeOfIcon.height');
   overflow: hidden;
