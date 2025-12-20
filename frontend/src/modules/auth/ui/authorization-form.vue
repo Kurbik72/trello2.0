@@ -15,10 +15,10 @@ const maxWidth = computed(() => `${props.maxWidth}px`)
     <div class="header">
       <slot name="header" />
     </div>
-    <div class="field-list">
+    <div class="field-list" v-if="$slots['field-list']">
       <slot name="field-list" />
     </div>
-    <div class="submit-content">
+    <div class="submit-content" v-if="$slots['submit-content']">
       <slot name="submit-content" />
     </div>
   </form>
