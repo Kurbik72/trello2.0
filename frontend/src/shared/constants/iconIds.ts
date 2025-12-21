@@ -1,3 +1,7 @@
-export enum iconIds {
-  logo = 'logo',
+export const customIcon = {
+  logo: 'logo',
+}
+
+export const primeVueIcons = {
+  user: 'pi pi-user',
 }
