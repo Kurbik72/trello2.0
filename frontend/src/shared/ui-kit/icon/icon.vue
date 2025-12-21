@@ -1,13 +1,28 @@
 <script setup lang="ts">
-import { iconIds } from '@/shared/constants/iconIds'
+import { customIcon, primeVueIcons } from '@/shared/constants/iconIds'
+import { iconMap } from '@/shared/utils/icon-map'
 import { computed, defineAsyncComponent, useAttrs } from 'vue'
 
-interface IconProps {
+type CustomIcon = keyof typeof customIcon
+
+type PrimeVueIcon = keyof typeof primeVueIcons
+
+interface CommonProps<T> {
   width: number
   height: number
-  iconId?: iconIds
-  primeVueIcon?: string
+  name: T
 }
+
+export type CustomIconProps = CommonProps<CustomIcon> & {
+  isCustomIcon: true
+  isPrimeVueIcon?: false
+}
+
+export type PrimeVueIconProps = CommonProps<PrimeVueIcon> & {
+  isPrimeVueIcon: true
+  isCustomIcon?: false
+}
+type IconProps = CustomIconProps | PrimeVueIconProps
 
 const props = defineProps<IconProps>()
 
@@ -16,15 +31,16 @@ const sizeOfIcon = computed(() => ({
   height: `${props.height}px`,
 }))
 const icon = computed(() =>
-  props.iconId ? defineAsyncComponent(() => import(`@/assets/icons/${props.iconId}.svg`)) : 'i',
+  props.isCustomIcon
+    ? defineAsyncComponent(() => import(`@/assets/icons/${iconMap(props)}.svg`))
+    : 'i',
 )
 const attrs = useAttrs()
-// TODO: add map for primevue icons for view like this: <i name="user" />
-const styleIcon = computed(() => ['icon', `${props.primeVueIcon}`])
+const styleIcon = computed(() => ['icon', iconMap(props)])
 </script>
 
 <template>
-  <component :is="icon" :class="styleIcon" :attrs="attrs" />
+  <component :is="icon" :class="styleIcon" v-bind="attrs" />
 </template>
 
 <style scoped>

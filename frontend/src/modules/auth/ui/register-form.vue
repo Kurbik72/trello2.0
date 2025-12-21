@@ -7,7 +7,14 @@ import Icon from '@/shared/ui-kit/icon/icon.vue'
   <authorization-form max-width="400">
     <template #header>
       <div>
-        <icon prime-vue-icon="pi pi-user" :width="24" :height="24" :style="{ color: '#635bff' }" />
+        <icon
+          is-prime-vue-icon
+          :width="48"
+          :height="48"
+          :style="{ color: '#635bff' }"
+          name="user"
+        />
+        <p>sfsdf</p>
       </div>
     </template>
   </authorization-form>

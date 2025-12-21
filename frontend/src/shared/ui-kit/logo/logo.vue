@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Icon from '@/shared/ui-kit/icon/icon.vue'
-import { iconIds } from '@/shared/constants/IconIds'
 import { computed } from 'vue'
 
 interface LogoProps {
@@ -15,7 +14,7 @@ const isTitleVisible = computed(() => props.withTitle)
 
 <template>
   <div class="logo">
-    <Icon :width="24" :height="24" :iconId="iconIds.logo" />
+    <icon :width="24" :height="24" is-custom-icon name="logo" />
     <h1 class="logo-text" v-if="isTitleVisible">Trello Clone</h1>
   </div>
 </template>
