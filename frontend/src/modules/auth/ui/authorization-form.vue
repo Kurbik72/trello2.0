@@ -33,7 +33,9 @@ const maxWidth = computed(() => `${props.maxWidth}px`)
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   padding: 24px;
 }
-.header .field-list .submit-content {
+.header,
+.field-list,
+.submit-content {
   display: flex;
   flex-direction: column;
   align-items: center;

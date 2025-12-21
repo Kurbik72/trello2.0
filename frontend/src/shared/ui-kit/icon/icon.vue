@@ -45,6 +45,7 @@ const styleIcon = computed(() => ['icon', iconMap(props)])
 
 <style scoped>
 .icon {
+  font-size: v-bind('sizeOfIcon.width');
   display: flex;
   align-items: center;
   justify-content: center;

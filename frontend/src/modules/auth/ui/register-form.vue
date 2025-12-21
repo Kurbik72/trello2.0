@@ -6,18 +6,30 @@ import Icon from '@/shared/ui-kit/icon/icon.vue'
 <template>
   <authorization-form max-width="400">
     <template #header>
-      <div>
-        <icon
-          is-prime-vue-icon
-          :width="48"
-          :height="48"
-          :style="{ color: '#635bff' }"
-          name="user"
-        />
-        <p>sfsdf</p>
+      <div class="header-icon">
+        <icon is-prime-vue-icon name="user" :width="48" :height="48" :style="{ color: '#ffff' }" />
       </div>
+      <span class="header-title">Create an account</span>
     </template>
   </authorization-form>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.header {
+  &-icon {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background:
+      linear-gradient(90deg, #635bff, #928aff) border-box,
+      #fff padding-box;
+    padding: 12px;
+  }
+  &-title {
+    font-family: 'Inter';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    color: #1f2937;
+  }
+}
+</style>
